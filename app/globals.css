@@ -1,0 +1,120 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* ==========================================================================
+   DRA. ANA BEATRIZ BECKMAN — Design Tokens
+   Paleta e tipografia 100% autorais, definidas a partir do briefing da marca.
+   Referência de nível/sofisticação: sites premium internacionais.
+   Nenhum conteúdo, imagem ou texto de terceiros é reproduzido aqui.
+   ========================================================================== */
+
+@theme {
+  /* Cor — tons quentes, suaves, "pele" e dourado discreto */
+  --color-ivory: #fbf6f1;      /* fundo base */
+  --color-ivory-deep: #f5ede5; /* fundo alternado, levemente mais denso */
+  --color-blush: #f0dad3;      /* rosa claro — seções, backgrounds suaves */
+  --color-nude: #d2a98f;       /* nude — bordas, divisores, acentos médios */
+  --color-champagne: #b08d5b;  /* dourado discreto — detalhes, hover, ícones */
+  --color-champagne-soft: #ded0ba;
+  --color-espresso: #372420;   /* marrom escuro — texto principal */
+  --color-espresso-soft: #6b544c; /* marrom claro — texto secundário */
+  --color-white: #ffffff;
+
+  /* Tipografia */
+  --font-display: var(--font-bodoni), "Times New Roman", serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+
+  /* Raios e sombras — cantos suaves, sombras delicadas */
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.75rem;
+  --radius-xl: 2.5rem;
+  --shadow-soft: 0 20px 60px -20px rgb(55 36 32 / 0.18);
+  --shadow-soft-sm: 0 8px 30px -12px rgb(55 36 32 / 0.15);
+
+  /* Easing autoral — usado em toda a coreografia de scroll/reveal */
+  --ease-veil: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --container-8xl: 90rem;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+@layer base {
+  * {
+    border-color: var(--color-nude);
+  }
+
+  html {
+    scroll-behavior: auto; /* Lenis assume o controle do smooth scroll */
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-espresso);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background-color: var(--color-champagne);
+    color: var(--color-white);
+  }
+
+  /* Foco visível — acessibilidade (nunca remover, apenas estilizar) */
+  :focus-visible {
+    outline: 2px solid var(--color-champagne);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Respeita usuários que preferem menos movimento */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ==========================================================================
+   Cursor autoral — só ativa em desktop com ponteiro fino, via classe
+   adicionada por JS (evita cursor invisível se o script falhar)
+   ========================================================================== */
+
+@media (pointer: fine) {
+  html.custom-cursor-active,
+  html.custom-cursor-active a,
+  html.custom-cursor-active button {
+    cursor: none;
+  }
+}
+
+/* ==========================================================================
+   Utilidades de seção
+   ========================================================================== */
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-champagne);
+}
+
+@utility section-pad {
+  padding-top: clamp(4rem, 9vw, 8rem);
+  padding-bottom: clamp(4rem, 9vw, 8rem);
+}
